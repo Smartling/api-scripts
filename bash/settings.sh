@@ -40,4 +40,4 @@ SUPPORTED_TMX_TYPES=(full published)
 # curl
 CURL_OPTIONS=()
 # if enabled HTTP headers will be saved in a separate file in the same directory as the downloaded file
-KEEP_HTTP_HEADERS=true
+KEEP_HTTP_HEADERS=false
