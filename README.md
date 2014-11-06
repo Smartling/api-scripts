@@ -12,7 +12,9 @@ For a full description of the Smartling Translation API, please read the docs at
 Quick start
 -----------
 
-Update bash/settings.sh with your API key and Project ID and select the API service URL to use.
+Update bash/settings.sh file with your Project ID and API Key that can be found on the Smartling Dashboard's API settings page (https://dashboard.smartling.com/settings/api.htm).
+
+By default scripts use the File API service on Production. If you would like to use our Sandbox instead please change API service URL setting in bash/settings.sh.
 
 
 Bug tracker

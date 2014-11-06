@@ -9,7 +9,7 @@ Usage: ${0##*/} [options] file ...
 OPTIONS:
     -h Show this message.
 
-    -t (REQUIRED) Unique Smartling file type identifie. One of the following:
+    -t (REQUIRED) Unique Smartling file type identifier. One of the following:
                   (${SUPPORTED_FILE_TYPES[@]})
 
     -u (OPTIONAL) File URI scheme. One of the following:
