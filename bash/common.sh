@@ -2,23 +2,7 @@
 
 script_dir="$(dirname "$0")"
 source "$script_dir/settings.sh"
-
-# regexes
-RESPONSE_CODE_REGEX='"code":"([^"]+)"'
-RESPONSE_MESSAGES_REGEX='"messages":\[(.*)\]'
-
-LOCALE_REGEX='"locale":"([^"]+)"'
-FILE_URI_REGEX='"fileUri":"([^"]+)"'
-FILE_COUNT_REGEX='"fileCount":([0-9]+)'
-WORD_COUNT_REGEX='"wordCount":([0-9]+)'
-STRING_COUNT_REGEX='"stringCount":([0-9]+)'
-APPROVED_STRING_COUNT_REGEX='"approvedStringCount":([0-9]+)'
-COMPLETED_STRING_COUNT_REGEX='"completedStringCount":([0-9]+)'
-OVERWRITTEN_REGEX='"overWritten":(true|false)'
-
-# globals
-SM_RESPONSE=""
-SM_CODE=""
+source "$script_dir/globals.sh"
 
 OLD_CURL_OPTIONS=$CURL_OPTIONS
 
@@ -32,7 +16,7 @@ function curl_restore {
 }
 
 function warn_and_exit {
-    if [[ -n "$1" ]]; then echo "\n$1\n"; fi
+    if [[ -n "$1" ]]; then echo $'\n'"$1"$'\n'; fi
     usage
     exit 1
 }
