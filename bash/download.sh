@@ -211,7 +211,9 @@ fi
 
 curl_silent
 list_files "$URI_MASK"
-if [[ $? -eq 0 ]]; then
+exit_code=$?
+curl_restore
+if [[ ${exit_code} -eq 0 ]]; then
     FILES_TO_DOWNLOAD=("${SM_FILES[@]}")
     if [[ ${#FILES_TO_DOWNLOAD[@]} -eq 0 ]]; then
         echo "No files to download found"
@@ -221,22 +223,24 @@ if [[ $? -eq 0 ]]; then
     fi
 else
     print_response_error "Listing of files failed:" "$SM_RESPONSE"
-    exit 1
+    exit ${exit_code}
 fi
 
 if [[ "$DOWNLOAD_TYPE" != "original" ]]; then
     if [[ "${#LOCALES[@]}" -eq 0 ]]; then
+        curl_silent
         list_locales
-        if [[ $? -eq 0 ]]; then
+        exit_code=$?
+        curl_restore
+        if [[ ${exit_code} -eq 0 ]]; then
             LOCALES=("${SM_LOCALES[@]}")
          else
             print_response_error "Listing of locales failed:" "$SM_RESPONSE"
-            exit 1
+            exit ${exit_code}
         fi
     fi
     echo "The locales to use: (${LOCALES[@]})"
 fi
-curl_restore
 echo
 
 if [[ "$DOWNLOAD_TYPE" == "original" ]]; then

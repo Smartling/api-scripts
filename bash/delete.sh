@@ -91,7 +91,9 @@ fi
 
 curl_silent
 list_files "$URI_MASK" "${CONDITIONS[@]}"
-if [[ $? -eq 0 ]]; then
+local exit_code=$?
+curl_restore
+if [[ ${exit_code} -eq 0 ]]; then
     FILES_TO_DELETE=("${SM_FILES[@]}")
     if [[ ${#FILES_TO_DELETE[@]} -eq 0 ]]; then
         echo "No files to delete found"
@@ -101,8 +103,7 @@ if [[ $? -eq 0 ]]; then
     fi
 else
     print_error_response "Listing of files failed:" "$SM_RESPONSE"
-    exit 1
+    exit ${exit_code}
 fi
-curl_restore
 
 delete_files

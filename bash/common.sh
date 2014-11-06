@@ -42,12 +42,13 @@ function verify_api_available {
     curl_silent
     # test settings and availability by fetching a list of project locales
     list_locales
-    if [[ $? != 0 ]]; then
+    local exit_code=$?
+    curl_restore
+    if [[ ${exit_code} != 0 ]]; then
         print_error_response "Error validating server connectivity:" "$SM_RESPONSE"
         echo "Please verify your API key and Project ID settings."
-        exit 1
+        exit ${exit_code}
     fi
-    curl_restore
 }
 
 function get_response_code {
