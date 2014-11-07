@@ -66,8 +66,7 @@ function get_file_uri {
     else
         local file_name=$(basename "$file")
         if [[ "$FILE_URI_SCHEME" == "prefix" ]]; then
-            local normalized_prefix=$(normalize_file_uri_prefix "$FILE_URI_PREFIX")
-            echo "$normalized_prefix$file_name"
+            echo "$FILE_URI_PREFIX$file_name"
         else
             echo "$file_name"
         fi
