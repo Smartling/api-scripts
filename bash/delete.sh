@@ -91,7 +91,7 @@ fi
 
 curl_silent
 list_files "$URI_MASK" "${CONDITIONS[@]}"
-local exit_code=$?
+exit_code=$?
 curl_restore
 if [[ ${exit_code} -eq 0 ]]; then
     FILES_TO_DELETE=("${SM_FILES[@]}")
