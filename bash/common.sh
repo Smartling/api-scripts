@@ -75,16 +75,6 @@ function get_value_using_regex {
     fi
 }
 
-function match_values_using_regex {
-    local str="$1"
-    local regex="$2"
-    VALUE_MATCHES=()
-    while [[ "$str" =~ $regex ]]; do # loop until matches found
-        VALUE_MATCHES+=("${BASH_REMATCH[1]}") # add match
-        str=${str#*"${BASH_REMATCH[1]}"} # remove part of the string already matched
-    done
-}
-
 function string_to_array {
     SM_ARRAY=()
     local str="$1"
@@ -231,8 +221,9 @@ function list_locales {
     SM_CODE=$(get_response_code "$SM_RESPONSE")
     if [[ "$SM_CODE" != "SUCCESS" ]]; then return 1; fi
 
-    match_values_using_regex "$SM_RESPONSE" "$LOCALE_REGEX"
-    SM_LOCALES+=("${VALUE_MATCHES[@]}")
+    local locales=$(echo "$SM_RESPONSE" | grep -oEi "$LOCALE_REGEX" | cut -c11- | rev | cut -c2- | rev)
+    string_to_array "$locales"
+    SM_LOCALES+=("${SM_ARRAY[@]}")
 
     return 0
 }
@@ -276,7 +267,7 @@ function list_files {
             files_count=$(get_value_using_regex "$SM_RESPONSE" "$FILE_COUNT_REGEX")
             if [[ ${files_count} -eq 0 ]]; then break; fi
         fi
-        # custom handling in order to support double quotes (feel free to optimize)
+
         local file_uris=$(echo "$SM_RESPONSE" | grep -oEi "$FILE_URI_REGEX" | cut -c12- | rev | cut -c3- | rev)
         string_to_array "$file_uris"
         for file_uri in "${SM_ARRAY[@]}"; do

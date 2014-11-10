@@ -32,7 +32,7 @@ RESPONSE_CODE_REGEX='"code":"([^"]+)"'
 RESPONSE_MESSAGES_REGEX='"messages":\[(.*)\]'
 
 LOCALE_REGEX='"locale":"([^"]+)"'
-FILE_URI_REGEX='"fileUri":"(.+?)",' # this regex is handled differently than the rest
+FILE_URI_REGEX='"fileUri":"(.+?)",'
 FILE_COUNT_REGEX='"fileCount":([0-9]+)'
 WORD_COUNT_REGEX='"wordCount":([0-9]+)'
 STRING_COUNT_REGEX='"stringCount":([0-9]+)'
