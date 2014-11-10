@@ -116,6 +116,10 @@ function get_array_value_by_key {
     echo "$value"
 }
 
+function unescapeJson {
+    echo "$1" | sed -e 's/\\\\/\\/g' -e 's/\\"/"/g'
+}
+
 function is_supported_file_type {
     array_contains_value "$1" "${SUPPORTED_FILE_TYPES[@]}"
     return $?
@@ -144,19 +148,6 @@ function is_supported_glossary_type {
 function is_supported_tmx_type {
     array_contains_value "$1" "${SUPPORTED_TMX_TYPES[@]}"
     return $?
-}
-
-function normalize_file_uri_prefix {
-    # repalce '\' with '/'
-    local file_uri_prefix=$(echo "$1" | sed 's/\\/\//g')
-    # append separators if necessary
-    if [[ ! "$file_uri_prefix" =~ ^[\/] ]]; then
-        file_uri_prefix="$DEFAULT_FILE_PREFIX_SEPARATOR$file_uri_prefix"
-    fi
-    if [[ ! "$file_uri_prefix" =~ [-\/_]$ ]]; then
-        file_uri_prefix="$file_uri_prefix$DEFAULT_FILE_PREFIX_SEPARATOR"
-    fi
-    echo "$file_uri_prefix"
 }
 
 function mkdir_if_necessary {
@@ -285,9 +276,13 @@ function list_files {
             files_count=$(get_value_using_regex "$SM_RESPONSE" "$FILE_COUNT_REGEX")
             if [[ ${files_count} -eq 0 ]]; then break; fi
         fi
-
-        match_values_using_regex "$SM_RESPONSE" "$FILE_URI_REGEX"
-        SM_FILES+=("${VALUE_MATCHES[@]}")
+        # custom handling in order to support double quotes (feel free to optimize)
+        local file_uris=$(echo "$SM_RESPONSE" | grep -oEi "$FILE_URI_REGEX" | cut -c12- | rev | cut -c3- | rev)
+        string_to_array "$file_uris"
+        for file_uri in "${SM_ARRAY[@]}"; do
+            file_uri=$(unescapeJson "$file_uri")
+            SM_FILES+=("$file_uri")
+        done
 
         offset=$((offset + batch_size))
     done
