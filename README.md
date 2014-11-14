@@ -1,10 +1,25 @@
+[Smartling](http://www.smartling.com)
+=================
+The Smartling translation management platform helps simplify the process of translating content for web sites, web apps, mobile apps and desktop apps.
+
+The platform lets you organize and manage your content, coordinate your team, and provides all the tools that translators need to perform their job quickly while producing appropriate, high quality translations.
+
+Your Smartling account stores all your translations so they can be leveraged whenever you make updates to your original source content.  
+
+Integration features automatically capture instructions for translators and mask variable syntax and HTML markup in your source content so translators don't have to learn the syntax and cannot provide a translation that has incorrect syntax.
+
+Context features let you build a glossary and style guide as well as providing visual context to show the translators exactly how the string appears on your site or in your application.
+
+To make the process fully automatic Smartling supports a File API to upload original resource files and download the translated files.
+
+To learn more and create free trial account visit [Smartling](http://www.smartling.com/free-trial)
+
 [Smartling Translation API](http://docs.smartling.com)
 =================
 
 This repository contains scripts for working with various Smartling APIs.
 
-The Smartling Translation API lets developers to internationalize their website or app by automating the translation and integration of their site content.
-Developers can upload resource files and download the translated files in a language of their choosing.
+Developers can upload resource files and download the translated files.
 
 For a full description of the Smartling Translation API, please read the docs at: http://docs.smartling.com
 
