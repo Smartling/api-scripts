@@ -357,6 +357,7 @@ function upload_file {
     local file_uri="$2"
     local file_type="$3"
     local custom_placeholder="$4"
+    local callback_url="$5"
 
     local url="$(get_base_url)/file/upload"
 
@@ -369,6 +370,9 @@ function upload_file {
     )
     if [[ -n "$custom_placeholder" ]]; then
         params+=(-F "smartling.placeholder_format_custom=$custom_placeholder")
+    fi
+    if [[ -n "$callback_url" ]]; then
+        params+=(-F "callbackUrl=$callback_url")
     fi
 
     SM_RESPONSE=$(curl $CURL_OPTIONS "${params[@]}" "$url")

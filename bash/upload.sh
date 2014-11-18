@@ -23,6 +23,10 @@ OPTIONS:
 
     -p (OPTIONAL) Valid Smartling custom placeholder format.
 
+    -c (OPTIONAL) Callback URL that will be invoked using GET request when a file is 100% published for a locale.
+
+                  The following parameters will be included in the request: fileUri, locale
+
     -e (OPTIONAL) Set this flag to run in 'test' mode and display the list of files that would have been uploaded.
 EOF
 }
@@ -38,7 +42,7 @@ function upload_files {
                 print_file_info "$file" "$file_uri"
             else
                 echo "Uploading [file: \"$file\", uri: \"$file_uri\"]..."
-                upload_file "$file" "$file_uri" "$FILE_TYPE" "$CUSTOM_PLACEHOLDER"
+                upload_file "$file" "$file_uri" "$FILE_TYPE" "$CUSTOM_PLACEHOLDER" "$CALLBACK_URL"
                 if [[ $? -eq 0 ]]; then
                     print_upload_response "$SM_RESPONSE"
                 else
@@ -87,11 +91,12 @@ FILE_TYPE=""
 FILE_URI_SCHEME="$DEFAULT_FILE_URI_SCHEME"
 FILE_URI_PREFIX=""
 CUSTOM_PLACEHOLDER=""
+CALLBACK_URL=""
 TEST_MODE=false
 
 OPTERR=0
 OPTIND=1
-while getopts ":ht:u:x:p:e" opt; do
+while getopts ":ht:u:x:p:c:e" opt; do
     case "$opt" in
     h)
         usage && exit 0
@@ -107,6 +112,9 @@ while getopts ":ht:u:x:p:e" opt; do
         ;;
     p)
         CUSTOM_PLACEHOLDER=$OPTARG
+        ;;
+    c)
+        CALLBACK_URL=$OPTARG
         ;;
     e)
         TEST_MODE=true
