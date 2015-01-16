@@ -7,7 +7,7 @@ SUPPORTED_CONDITIONS=(haveAtLeastOneUnapproved haveAtLeastOneApproved haveAtLeas
 SUPPORTED_FILE_TYPES=(android ios gettext plaintext csv html xml json javaProperties yaml qt xliff docx pptx xlsx idml resx)
 
 # see https://docs.smartling.com/display/docs/Files+API#FilesAPI-/file/get(GET)
-SUPPORTED_DOWNLOAD_TYPES=(original pending published pseudo)
+SUPPORTED_DOWNLOAD_TYPES=(original pending published pseudo contextMatchingInstrumented)
 
 # supported URI prefix schemes
 SUPPORTED_FILE_URI_SCHEMES=(fileName relativePath prefix)
