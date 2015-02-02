@@ -4,7 +4,7 @@
 SUPPORTED_CONDITIONS=(haveAtLeastOneUnapproved haveAtLeastOneApproved haveAtLeastOneTranslated haveAllTranslated haveAllApproved haveAllUnapproved)
 
 # see https://docs.smartling.com/display/docs/Files+API#FilesAPI-/file/upload(POST)
-SUPPORTED_FILE_TYPES=(android ios gettext plaintext csv html xml json javaProperties yaml qt xliff docx pptx xlsx idml resx)
+SUPPORTED_FILE_TYPES=(android ios gettext plaintext csv html xml json javaProperties yaml qt xliff docx pptx xlsx idml resx stringsdict)
 
 # see https://docs.smartling.com/display/docs/Files+API#FilesAPI-/file/get(GET)
 SUPPORTED_DOWNLOAD_TYPES=(original pending published pseudo contextMatchingInstrumented)
