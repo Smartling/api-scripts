@@ -30,7 +30,7 @@ OPTIONS:
 
     -O (OPTIONAL) Use this flag to include original strings when no translations are available.
 
-                  Applies to the followoing file types only: gettext, custom xml or json.
+                  Applies to the followoing file types only: gettext, javaProperties, custom xml or json.
 
                   Applies to all download types except 'original'.
 
@@ -151,7 +151,7 @@ LOCALES=()
 COMPLETED_ONLY=false
 APPEND_LOCALES=false
 USE_URI_SUB_FOLDERS=false
-INCLUDE_ORIGINAL=""
+INCLUDE_ORIGINAL=false
 OVERWRITE_FILES=false
 
 OPTERR=0
@@ -180,7 +180,7 @@ while getopts ":ht:u:l:CASOW" opt; do
         USE_URI_SUB_FOLDERS=true
         ;;
     O)
-        INCLUDE_ORIGINAL="true"
+        INCLUDE_ORIGINAL=$OPTARG
         ;;
     W)
         OVERWRITE_FILES=true
