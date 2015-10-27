@@ -358,6 +358,7 @@ function upload_file {
     local file_type="$3"
     local custom_placeholder="$4"
     local callback_url="$5"
+    local namespace="$6"
 
     local url="$(get_base_url)/file/upload"
 
@@ -373,6 +374,9 @@ function upload_file {
     fi
     if [[ -n "$callback_url" ]]; then
         params+=(-F "callbackUrl=$callback_url")
+    fi
+    if [[ -n "$namespace" ]]; then
+        params+=(-F "smartling.namespace=$namespace")
     fi
 
     SM_RESPONSE=$(curl $CURL_OPTIONS "${params[@]}" "$url")
