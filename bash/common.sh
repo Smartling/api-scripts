@@ -316,10 +316,10 @@ function check_file_status {
 
     get_file_status "$1" "$2"
     if [[ $? -eq 0 ]]; then
-        local string_count=$(get_value_using_regex "$SM_RESPONSE" "$STRING_COUNT_REGEX")
+        local approved_string_count=$(get_value_using_regex "$SM_RESPONSE" "$APPROVED_STRING_COUNT_REGEX")
         local completed_count=$(get_value_using_regex "$SM_RESPONSE" "$COMPLETED_STRING_COUNT_REGEX")
 
-        if [[ ${string_count} -gt 0 && ${string_count} -eq ${completed_count} ]]; then
+        if [[ ${approved_string_count} -gt 0 && ${approved_string_count} -eq ${completed_count} ]]; then
             SM_FILE_STATUS="completed"
         fi
 
