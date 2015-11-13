@@ -28,6 +28,8 @@ OPTIONS:
                   The following parameters will be included in the request: fileUri, locale
 
     -e (OPTIONAL) Set this flag to run in 'test' mode and display the list of files that would have been uploaded.
+
+    -n (OPTIONAL) Set the namespace for the file.
 EOF
 }
 
@@ -42,7 +44,7 @@ function upload_files {
                 print_file_info "$file" "$file_uri"
             else
                 echo "Uploading [file: \"$file\", uri: \"$file_uri\"]..."
-                upload_file "$file" "$file_uri" "$FILE_TYPE" "$CUSTOM_PLACEHOLDER" "$CALLBACK_URL"
+                upload_file "$file" "$file_uri" "$FILE_TYPE" "$CUSTOM_PLACEHOLDER" "$CALLBACK_URL" "$NAMESPACE"
                 if [[ $? -eq 0 ]]; then
                     print_upload_response "$SM_RESPONSE"
                 else
@@ -93,10 +95,11 @@ FILE_URI_PREFIX=""
 CUSTOM_PLACEHOLDER=""
 CALLBACK_URL=""
 TEST_MODE=false
+NAMESPACE=""
 
 OPTERR=0
 OPTIND=1
-while getopts ":ht:u:x:p:c:e" opt; do
+while getopts ":ht:u:x:p:c:en:" opt; do
     case "$opt" in
     h)
         usage && exit 0
@@ -118,6 +121,9 @@ while getopts ":ht:u:x:p:c:e" opt; do
         ;;
     e)
         TEST_MODE=true
+        ;;
+    n)
+        NAMESPACE=$OPTARG
         ;;
     \?)
         warn_and_exit "Invalid option: -$OPTARG"
