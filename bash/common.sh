@@ -268,7 +268,7 @@ function list_files {
             if [[ ${files_count} -eq 0 ]]; then break; fi
         fi
 
-        local file_uris=$(echo "$SM_RESPONSE" | grep -oEi "$FILE_URI_REGEX" | cut -c12- | rev | cut -c3- | rev)
+        local file_uris=$(echo "$SM_RESPONSE" | grep -oPi "$FILE_URI_REGEX" | cut -c12- | rev | cut -c3- | rev)
         string_to_array "$file_uris"
         for file_uri in "${SM_ARRAY[@]}"; do
             file_uri=$(unescapeJson "$file_uri")
