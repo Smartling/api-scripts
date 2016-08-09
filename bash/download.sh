@@ -92,19 +92,19 @@ function download_translated {
             fi
             mkdir_if_necessary "$dir"
 
-            local file_path="$dir/$file_name"
-            if [[ "$OVERWRITE_FILES" == true ]]; then
-                if [ -f "$file_path" ]; then rm "$file_path"; fi
-            else
-                file_path=$(get_safe_file_path "$file_path")
-            fi
-
             if [[ "$COMPLETED_ONLY" == true ]]; then
                 check_file_status "$file" "$locale"
                 # print_file_status_response "$SM_RESPONSE"
                 if [[ "$SM_FILE_STATUS" != "completed" ]]; then
                     continue
                 fi
+            fi
+
+            local file_path="$dir/$file_name"
+            if [[ "$OVERWRITE_FILES" == true ]]; then
+                if [ -f "$file_path" ]; then rm "$file_path"; fi
+            else
+                file_path=$(get_safe_file_path "$file_path")
             fi
 
             download_file "$file" "$file_path" "$locale" "$DOWNLOAD_TYPE" "$INCLUDE_ORIGINAL"
@@ -248,4 +248,3 @@ if [[ "$DOWNLOAD_TYPE" == "original" ]]; then
 else
     download_translated
 fi
-
