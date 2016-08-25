@@ -340,7 +340,7 @@ function delte_file {
         --data-urlencode "fileUri=$file_uri"
     )
 
-    SM_RESPONSE=$(curl -X DELETE $CURL_OPTIONS "${params[@]}" "$url")
+    SM_RESPONSE=$(curl -X POST $CURL_OPTIONS "${params[@]}" "$url")
     SM_CODE=$(get_response_code "$SM_RESPONSE")
     if [[ "$SM_CODE" != "SUCCESS" ]]; then return 1; fi
 
