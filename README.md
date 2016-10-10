@@ -12,7 +12,7 @@ Context features let you build a glossary and style guide as well as providing v
 
 To make the process fully automatic Smartling supports a File API to upload original resource files and download the translated files.
 
-To learn more and create free trial account visit [Smartling](https://signup.smartling.com/)
+To learn more and create a free trial account visit [Smartling](https://www.smartling.com/pricing)
 
 [Smartling Translation API](http://docs.smartling.com)
 =================
