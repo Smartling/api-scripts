@@ -1,5 +1,8 @@
 [Smartling](http://www.smartling.com)
 =================
+
+:warning:Smartling now has API v2 and Smartling-CLI.  See [Smartling-CLI](https://help.smartling.com/v1.0/docs/cli-command-line-interface) for more information :warning:
+
 The Smartling translation management platform helps simplify the process of translating content for web sites, web apps, mobile apps and desktop apps.
 
 The platform lets you organize and manage your content, coordinate your team, and provides all the tools that translators need to perform their job quickly while producing appropriate, high quality translations.
